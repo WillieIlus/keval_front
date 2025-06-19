@@ -81,7 +81,7 @@ onMounted(() => {
   intervalId = setInterval(() => {
     currentImageIndex.value = (currentImageIndex.value + 1) % images.length;
     currentCtaIndex.value = (currentCtaIndex.value + 1) % callToAction.length;
-  }, 90000); // Change image every 9 seconds
+  }, 30000); // Change image every 3 seconds
 });
 
 onUnmounted(() => {
