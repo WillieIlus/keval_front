@@ -1,16 +1,18 @@
 <template>
-  <section class="container mx-auto py-12">
-    <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Frequently Asked Questions</h2>
+  <!-- Section: Responsive padding -->
+  <section class="container mx-auto py-8 md:py-12">
+    <!-- Heading: Responsive text size and margin -->
+    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 text-center mb-6 md:mb-8">Frequently Asked Questions</h2>
     <div class="space-y-4">
       <div v-for="item in localItems" :key="item.id" class="border-b border-gray-300 last:border-b-0">
         <div
-          class="flex justify-between items-center p-6 cursor-pointer"
+          class="flex justify-between items-center p-4 md:p-6 cursor-pointer"
           @click="toggleAnswer(item.id)"
           role="button"
           :aria-expanded="item.isOpen.toString()"
           :aria-controls="'faq-answer-' + item.id"
         >
-          <h3 class="text-xl font-semibold text-gray-700">{{ item.question }}</h3>
+          <h3 class="text-lg md:text-xl font-semibold text-gray-700">{{ item.question }}</h3>
           <span
             class="transform transition-transform duration-200 ease-in-out"
             :class="{ 'rotate-180': item.isOpen }"
@@ -21,7 +23,7 @@
         <div
           v-if="item.isOpen"
           :id="'faq-answer-' + item.id"
-          class="p-6 pt-0 text-gray-600"
+          class="px-4 pb-4 md:px-6 md:pb-6 pt-0 text-gray-600"
           role="region"
         >
           <p>{{ item.answer }}</p>

@@ -1,22 +1,36 @@
 <template>
-  <section class="services-section container mx-auto py-12">
-    <h2 class="text-gray-800 font-bold text-3xl mb-8 text-center">Our Services</h2>
+  <section class="services-section container mx-auto py-8 md:py-12">
+    <h2 class="text-gray-800 font-bold text-2xl sm:text-3xl mb-6 md:mb-8 text-center">Our Services</h2>
     <div class="relative">
-      <div class="carousel-viewport overflow-hidden">
-        <div class="carousel-track flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(${translateX}px)` }" role="listbox" aria-label="Services Carousel">
-          <div v-for="(service) in services" :key="service.name" class="service-item-wrapper w-1/5 flex-shrink-0 px-2" ref="serviceItems">
+      <!-- On mobile, this will be a scrollable container. On md+, it's the viewport for the JS carousel. -->
+      <div
+        class="carousel-viewport overflow-x-auto md:overflow-hidden scroll-smooth scroll-snap-type-x-mandatory"
+        ref="carouselViewport"
+      >
+        <div
+          class="carousel-track flex"
+          :class="{ 'md:transition-transform md:duration-500 md:ease-in-out': isDesktopView }"
+          :style="isDesktopView ? { transform: `translateX(${translateX}px)` } : {}"
+          role="listbox"
+          aria-label="Services Carousel"
+        >
+          <!-- Responsive item widths -->
+          <div v-for="(service) in services" :key="service.name"
+               class="service-item-wrapper flex-shrink-0 px-2 scroll-snap-align-start
+                      w-4/5 sm:w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/5"
+               ref="serviceItems">
             <div class="service-content bg-gray-50 rounded-lg shadow-md p-4 text-center h-full flex flex-col" role="option" :aria-label="service.name">
-              <img :src="service.image" :alt="`${service.name} service`" class="w-full h-40 object-cover rounded-md mb-4" />
-              <h3 class="font-semibold text-gray-700 text-lg mt-auto">{{ service.name }}</h3>
+              <img :src="service.image" :alt="`${service.name} service`" class="w-full h-32 sm:h-36 md:h-40 object-cover rounded-md mb-4" />
+              <h3 class="font-semibold text-gray-700 text-base sm:text-lg mt-auto">{{ service.name }}</h3>
             </div>
           </div>
         </div>
       </div>
-      <!-- Left Arrow -->
+      <!-- Left Arrow: Visible on md and up -->
       <button @click="scrollLeft"
-              :disabled="services.length <= visibleCount"
+              :disabled="!isDesktopView || services.length <= currentVisibleCount"
               aria-label="Previous service"
-              class="arrow absolute top-1/2 transform -translate-y-1/2 left-2 z-20
+              class="arrow hidden md:flex absolute top-1/2 transform -translate-y-1/2 left-0 sm:left-2 z-20
                      bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-full shadow-lg w-10 h-10 flex items-center justify-center
                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-persian-green-500
                      disabled:opacity-50 disabled:cursor-not-allowed">
@@ -24,11 +38,11 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
-      <!-- Right Arrow -->
+      <!-- Right Arrow: Visible on md and up -->
       <button @click="scrollRight"
-              :disabled="services.length <= visibleCount"
+              :disabled="!isDesktopView || services.length <= currentVisibleCount"
               aria-label="Next service"
-              class="arrow absolute top-1/2 transform -translate-y-1/2 right-2 z-20
+              class="arrow hidden md:flex absolute top-1/2 transform -translate-y-1/2 right-0 sm:right-2 z-20
                      bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-full shadow-lg w-10 h-10 flex items-center justify-center
                      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-persian-green-500
                      disabled:opacity-50 disabled:cursor-not-allowed">
@@ -55,45 +69,70 @@ export default {
         { name: "Booklets & Books", image: "/diary.png" },
       ],
       currentIndex: 0,
-      visibleCount: 5,
+      currentVisibleCount: 1, // Number of items visible for desktop carousel logic
       translateX: 0,
-      itemWidth: 0, // Renamed from boxWidth, will be calculated
+      itemWidth: 0,
+      isDesktopView: false, // Controls JS carousel behavior
     };
+  },
+  computed: {
+    // Max starting index for the carousel to show a full "page" of items
+    maxStartIndex() {
+      if (!this.isDesktopView || this.services.length <= this.currentVisibleCount) {
+        return 0;
+      }
+      return this.services.length - this.currentVisibleCount;
+    }
   },
   methods: {
     scrollLeft() {
-      if (this.services.length <= this.visibleCount) return; // Should not be callable if button is disabled
+      if (!this.isDesktopView || this.services.length <= this.currentVisibleCount) return;
 
       this.currentIndex--;
       if (this.currentIndex < 0) {
-        // Was at the first item (index 0), loop to the last possible starting index
-        this.currentIndex = this.services.length - this.visibleCount;
+        this.currentIndex = this.maxStartIndex; // Loop to the end
       }
       this.updateTranslateX();
     },
     scrollRight() {
-      if (this.services.length <= this.visibleCount) return; // Should not be callable if button is disabled
+      if (!this.isDesktopView || this.services.length <= this.currentVisibleCount) return;
 
       this.currentIndex++;
-      // If currentIndex exceeds the last possible starting index for a full view
-      if (this.currentIndex > this.services.length - this.visibleCount) {
-        // Loop back to the beginning
-        this.currentIndex = 0;
-      } else if (this.services.length > this.visibleCount && this.currentIndex === this.services.length - this.visibleCount) {
-        // This condition ensures that if we are exactly at the last page, it's a valid state.
-        // The next click would loop due to the condition above.
-        // If we are already at the last possible starting index, a normal increment would make it loop.
-        // This part of the 'else if' might be redundant if the > condition handles it,
-        // but it's kept for clarity that this.currentIndex can indeed be services.length - visibleCount.
-        // The primary looping is handled by `this.currentIndex > this.services.length - this.visibleCount`
+      if (this.currentIndex > this.maxStartIndex) {
+        this.currentIndex = 0; // Loop to the beginning
       }
       this.updateTranslateX();
     },
     updateTranslateX() {
-      this.translateX = -this.itemWidth * this.currentIndex;
+      if (this.isDesktopView) {
+        this.translateX = -this.itemWidth * this.currentIndex;
+      } else {
+        this.translateX = 0; // No translation for mobile native scroll
+      }
     },
-    calculateItemWidth() { // Renamed for clarity
-      this.$nextTick(() => { 
+    handleResize() {
+      // Check for window before accessing to prevent SSR errors
+      if (typeof window === 'undefined') return;
+
+      this.isDesktopView = window.innerWidth >= 768; // md breakpoint
+
+      if (this.isDesktopView) {
+        if (window.innerWidth >= 1280) { // xl
+          this.currentVisibleCount = 5;
+        } else if (window.innerWidth >= 1024) { // lg
+          this.currentVisibleCount = 4;
+        } else { // md
+          this.currentVisibleCount = 3;
+        }
+      } else {
+        // For mobile, visibleCount isn't strictly for display but can be 1 for logic if needed
+        // However, with native scroll, it's less critical for display.
+        // Let's set it to a value that makes sense if we were to paginate mobile, e.g. 1 or 2.
+        // Or, just ensure currentIndex is reset if view changes.
+        this.currentVisibleCount = 1; // Or adjust based on sm breakpoint if desired
+      }
+
+      this.$nextTick(() => {
         const items = this.$refs.serviceItems;
         if (items && items.length > 0) {
           const firstItem = items[0];
@@ -101,17 +140,23 @@ export default {
           // Since .service-item-wrapper is w-1/5 and has px-2 (padding),
           // its offsetWidth is the correct width for one "slot".
           this.itemWidth = firstItem.offsetWidth;
-          this.updateTranslateX(); // Recalculate position based on new itemWidth
+          // Ensure currentIndex is valid after resize
+          if (this.isDesktopView && this.currentIndex > this.maxStartIndex) {
+            this.currentIndex = this.maxStartIndex;
+          } else if (!this.isDesktopView) {
+            this.currentIndex = 0; // Reset for mobile
+          }
+          this.updateTranslateX();
         }
       });
     },
   },
   mounted() {
-    this.calculateItemWidth();
-    window.addEventListener('resize', this.calculateItemWidth);
+    this.handleResize(); // Initial calculation
+    window.addEventListener('resize', this.handleResize);
   },
-  beforeUnmount() { 
-    window.removeEventListener('resize', this.calculateItemWidth);
+  beforeUnmount() {
+    window.removeEventListener('resize', this.handleResize);
   },
 };
 </script>
@@ -119,13 +164,16 @@ export default {
 <style scoped>
 /* Styles are primarily handled by Tailwind CSS classes in the template. */
 /* Keeping this block for any future highly specific scoped styles if necessary. */
-
 .carousel-viewport {
-  overflow: hidden;
+  /* Tailwind classes handle overflow now: overflow-x-auto md:overflow-hidden */
+  /* scroll-snap-type-x-mandatory is added via Tailwind for mobile */
 }
 
 .carousel-track {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  /* Transition is now conditional via Tailwind: md:transition-transform ... */
 }
+/* Hide scrollbar for a cleaner look on mobile, if desired */
+.carousel-viewport::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
+.carousel-viewport { -ms-overflow-style: none; scrollbar-width: none; } /* IE, Edge, Firefox */
 </style>

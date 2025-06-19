@@ -1,25 +1,44 @@
 <template>
-  <div class="bg-gray-100 py-8 px-4 sm:px-6 lg:px-8"> 
-    <div class="container mx-auto flex flex-row gap-8 items-start">
+  <div class="bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+    <!-- Container: flex-col on mobile, md:flex-row on medium screens up. items-center for mobile, md:items-start for desktop. -->
+    <div class="container mx-auto flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
       <!-- Left Column: Card -->
-      <div class="w-1/2">
-        <div class="bg-white rounded-lg shadow-xl overflow-hidden border border-persian-green-600">
-          <div class="bg-persian-green-600 text-white p-5">
-            <h2 class="text-xl font-semibold">Get a Quick Quote</h2> 
+      <!-- w-full on mobile, md:w-1/2 on medium. mb-6 for spacing on mobile, md:mb-0. -->
+      <div class="w-full md:w-1/2 mb-6 md:mb-0">
+        <!-- Card: Made persian green, text white. -->
+        <div class="bg-persian-green-600 text-white rounded-lg shadow-xl overflow-hidden">
+          <!-- Card Header: Responsive padding, border for separation. Text centered on mobile. -->
+          <div class="p-4 md:p-5 border-b border-persian-green-500">
+            <h2 class="text-xl font-semibold text-center md:text-left">Get a Quick Quote</h2>
           </div>
-          <div class="p-6">
-            <form @submit.prevent="handleSubmit">
-              <div class="mb-4">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Your Name:</label>
-                <BaseInput type="text" id="name" v-model="formData.name" placeholder="Enter your name" class="w-full"/>
+          <!-- Card Body: Responsive padding. -->
+          <div class="p-4 md:p-6">
+            <form @submit.prevent="handleSubmit" class="space-y-4">
+              <div>
+                <label for="name" class="block text-persian-green-100 text-sm font-bold mb-1">Your Name:</label>
+                <!-- BaseInput: Assuming it can be styled for dark backgrounds or has a dark variant.
+                     Example classes for dark theme: -->
+                <BaseInput
+                  type="text"
+                  id="name"
+                  v-model="formData.name"
+                  placeholder="Enter your name"
+                  class="w-full bg-persian-green-500 placeholder-persian-green-300 text-white border-persian-green-400 focus:ring-persian-green-300 focus:border-persian-green-300 rounded-md py-2 px-3"
+                />
               </div>
-              <div class="mb-6">
-                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Your Email:</label>
-                <BaseInput type="email" id="email" v-model="formData.email" placeholder="Enter your email" class="w-full"/>
+              <div>
+                <label for="email" class="block text-persian-green-100 text-sm font-bold mb-1">Your Email:</label>
+                <BaseInput
+                  type="email"
+                  id="email"
+                  v-model="formData.email"
+                  placeholder="Enter your email"
+                  class="w-full bg-persian-green-500 placeholder-persian-green-300 text-white border-persian-green-400 focus:ring-persian-green-300 focus:border-persian-green-300 rounded-md py-2 px-3"
+                />
               </div>
               <BaseButton
                 type="submit"
-                class="w-full bg-persian-green-600 hover:bg-persian-green-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-persian-green-500 transition duration-150 ease-in-out"
+                class="w-full bg-yellow-orange-500 hover:bg-yellow-orange-600 text-persian-green-900 font-bold py-3 px-4 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-orange-400 transition duration-150 ease-in-out"
               >
                 Submit
               </BaseButton>
@@ -28,11 +47,14 @@
         </div>
       </div>
       <!-- Right Column: Text -->
-      <div class="w-1/2 pt-5">
-        <h1 class="text-4xl font-bold text-gray-800 mb-6">
+      <!-- w-full on mobile, md:w-1/2 on medium. Text centered on mobile, md:text-left. -->
+      <div class="w-full md:w-1/2 text-center md:text-left">
+        <!-- Responsive heading -->
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 md:mb-6">
           We are the best
         </h1>
-        <p class="text-lg text-gray-700 leading-relaxed">
+        <!-- Responsive paragraph -->
+        <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur ea cumque quos quis esse? Ipsum similique nobis labore voluptates eligendi id distinctio sapiente in accusantium minima repellat, tempora aspernatur temporibus.
         </p>
       </div>

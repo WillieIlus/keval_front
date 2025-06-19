@@ -1,31 +1,38 @@
 <template>
-  <div class="bg-neutral-100 px-12 py-4 mb-12 border-b-8 border-persian-green-600">
-    <div class="container mx-auto flex justify-between items-center p-4">
-      <div class="w-2/3 pr-8">
-        <h2 class="text-3xl mb-4 text-neutral-700">{{ currentCta.CtaTopic }}</h2>
-        <p class="mb-4 text-5xl font-bold text-neutral-800 leading-tight">
+  <!-- Outer container: Adjusted padding and margin for mobile-first -->
+  <div class="bg-neutral-100 px-4 sm:px-6 md:px-8 lg:px-12 py-4 mb-8 md:mb-12 border-b-8 border-persian-green-600">
+    <!-- Flex container: Stacks vertically on mobile, row layout on medium screens and up -->
+    <div class="container mx-auto flex flex-col md:flex-row md:justify-between items-center p-4">
+      <!-- Text content: Full width on mobile, 2/3 on medium screens. Text centered on mobile, left-aligned on medium+ -->
+      <div class="w-full md:w-2/3 md:pr-8 text-center md:text-left mb-8 md:mb-0">
+        <!-- Heading: Responsive text size -->
+        <h2 class="text-xl sm:text-2xl md:text-3xl mb-4 text-neutral-700">{{ currentCta.CtaTopic }}</h2>
+        <!-- Main CTA Title: Responsive text size -->
+        <p class="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-800 leading-tight">
           {{ currentCta.CtaTitle }}
         </p>
-        <p class="mb-8 text-2xl text-neutral-900">
+        <!-- CTA Text: Responsive text size -->
+        <p class="mb-8 text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-900">
           {{ currentCta.CtaText }}
         </p>
         <BaseButton
-          class="bg-persian-green-600 hover:bg-persian-green-700 text-white text-lg font-semibold rounded-full py-3 px-8"
+          class="bg-persian-green-600 hover:bg-persian-green-700 text-white text-base sm:text-lg font-semibold rounded-full py-2 px-6 sm:py-3 sm:px-8"
         >
           <!--
             Consider if 'amber-700' was an intentional accent. If so,
             you might have an outlined button style like:
             class="border-accent-500 text-accent-500 hover:bg-accent-100 text-lg font-semibold rounded-full py-3 px-8 border-2"
             Assuming 'accent-500' and 'accent-100' are defined in your theme.
-            For a primary CTA, a filled button with the brand color is common.
+            For a primary CTA, a filled button with the brand color (as currently used) is common.
           -->
           Get Started
         </BaseButton>
       </div>
-      <div class="w-1/3 flex justify-center items-center">
-        <!-- Image will now be dynamic -->
-        <img :src="currentImageSrc" alt="Design Services Showcase" class="max-w-full h-auto -my-14">
-        </div>
+      <!-- Image container: Full width on mobile, 1/3 on medium screens. Spacing adjusted for mobile. -->
+      <div class="w-full md:w-1/3 flex justify-center items-center mt-6 md:mt-0">
+        <!-- Image: Responsive max-width for different screen sizes. Negative margin applied on medium screens and up for pop-out effect. -->
+        <img :src="currentImageSrc" alt="Design Services Showcase" class="max-w-xs sm:max-w-sm md:max-w-full h-auto md:-my-10 lg:-my-14">
+      </div>
     </div>
   </div>
 </template>
@@ -81,7 +88,7 @@ onMounted(() => {
   intervalId = setInterval(() => {
     currentImageIndex.value = (currentImageIndex.value + 1) % images.length;
     currentCtaIndex.value = (currentCtaIndex.value + 1) % callToAction.length;
-  }, 30000); // Change image every 3 seconds
+  }, 9000); // Change image and CTA every 9 seconds
 });
 
 onUnmounted(() => {
