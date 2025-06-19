@@ -1,0 +1,47 @@
+/* assets/css/tailwind.css */
+
+@import "tailwindcss";
+/* This replaces @tailwind base, components, utilities */
+
+@theme {
+  /* Persian Green */
+  --color-persian-green-50: #effefb;
+  --color-persian-green-100: #c7fff6;
+  --color-persian-green-200: #90ffec;
+  --color-persian-green-300: #51f7e2;
+  --color-persian-green-400: #1de4d1;
+  --color-persian-green-500: #04c8b8;
+  --color-persian-green-600: #00a69c;
+  --color-persian-green-700: #05807a;
+  --color-persian-green-800: #0a6562;
+  --color-persian-green-900: #0d5451;
+  --color-persian-green-950: #003333;
+
+  /* Gray */
+  --color-gray-50: #f6f6f6;
+  --color-gray-100: #e7e7e7;
+  --color-gray-200: #d1d1d1;
+  --color-gray-300: #b0b0b0;
+  --color-gray-400: #7f7f7f;
+  --color-gray-500: #6d6d6d;
+  --color-gray-600: #5d5d5d;
+  --color-gray-700: #4f4f4f;
+  --color-gray-800: #454545;
+  --color-gray-900: #3d3d3d;
+  --color-gray-950: #262626;
+
+  /* Yellow Orange */
+  --color-yellow-orange-50: #fff7eb;
+  --color-yellow-orange-100: #fde8c8;
+  --color-yellow-orange-200: #fbd08c;
+  --color-yellow-orange-300: #f8aa3f;
+  --color-yellow-orange-400: #f79628;
+  --color-yellow-orange-500: #f07310;
+  --color-yellow-orange-600: #d5510a;
+  --color-yellow-orange-700: #b1340c;
+  --color-yellow-orange-800: #8f2911;
+  --color-yellow-orange-900: #762311;
+  --color-yellow-orange-950: #440e04;
+
+}
+@layer base {}
