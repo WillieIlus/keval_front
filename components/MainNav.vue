@@ -2,7 +2,7 @@
   <!-- Loading State -->
   <div v-if="isLoading">
     <header
-      class="bg-persian-green-600 flex justify-center items-center text-white p-4 shadow-md"
+      class="bg-persian-green-600 dark:bg-persian-green-800 flex justify-center items-center text-white dark:text-gray-100 p-4 shadow-md"
     >
       <div class="container mx-auto flex justify-center items-center">
         <p class="text-white font-bold">Loading Navigation...</p>
@@ -14,7 +14,7 @@
   <!-- Loaded State -->
   <template v-else>
     <header
-      class="bg-persian-green-600 text-white p-4 shadow-md"
+      class="bg-persian-green-600 dark:bg-persian-green-800 text-white dark:text-gray-100 p-4 shadow-md"
     >
       <div class="container mx-auto flex justify-between md:justify-center items-center">
         <!-- Optional: Mobile Title / Placeholder for Logo (if you add one later) -->
@@ -26,7 +26,7 @@
         <nav class="hidden md:flex">
           <ul class="flex space-x-4 items-center">
             <BaseLink
-              class="px-3 py-2 text-sm font-medium text-white hover:bg-persian-green-700 rounded-md"
+              class="px-3 py-2 text-sm font-medium text-white dark:text-gray-100 hover:bg-persian-green-700 dark:hover:bg-persian-green-600 rounded-md"
               v-for="item in navitems"
               :key="item.path + '-desktop'"
               :to="item.path"
@@ -41,7 +41,7 @@
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
             type="button"
-            class="p-1.5 rounded-md text-persian-green-100 hover:bg-persian-green-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            class="p-1.5 rounded-md text-persian-green-100 dark:text-persian-green-200 hover:bg-persian-green-700 dark:hover:bg-persian-green-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-main-menu"
             :aria-expanded="isMobileMenuOpen.toString()"
           >
@@ -62,14 +62,14 @@
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-1"
     >
-      <div v-if="isMobileMenuOpen" class="md:hidden bg-persian-green-500" id="mobile-main-menu">
+      <div v-if="isMobileMenuOpen" class="md:hidden bg-persian-green-500 dark:bg-persian-green-700" id="mobile-main-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <BaseLink
             v-for="item in navitems"
             :key="item.path + '-mobile'"
             :to="item.path"
             @click="closeMobileMenu"
-            class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-persian-green-700 hover:text-white"
+            class="block px-3 py-2 rounded-md text-base font-medium text-white dark:text-gray-100 hover:bg-persian-green-700 dark:hover:bg-persian-green-600 hover:text-white dark:hover:text-gray-50"
           >
             {{ item.text }}
           </BaseLink>
@@ -78,7 +78,7 @@
     </Transition>
 
     <!-- Gray Bar: Hidden on mobile, shown on md and up. Responsive margin. -->
-    <div class="hidden md:block bg-gray-500 p-1 mb-8 md:mb-12"></div>
+    <div class="hidden md:block bg-gray-500 dark:bg-gray-700 p-1 mb-8 md:mb-12"></div>
   </template>
 </template>
 

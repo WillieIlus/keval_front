@@ -1,64 +1,36 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
+  darkMode: 'class', // This enables class-based dark mode
   content: [
-    './components/**/*.{vue,js,ts}',
-    './layouts/**/*.vue',
-    './pages/**/*.vue',
-    './app.vue',
-    './plugins/**/*.{js,ts}',
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./nuxt.config.{js,ts}",
+    "./app.vue", // If you are using an app.vue
   ],
   theme: {
     extend: {
       colors: {
+        // Assuming 'persian-green' is a custom color palette.
+        // If these are already part of your theme or default Tailwind, adjust as needed.
         'persian-green': {
-          50: 'var(--color-persian-green-50)',
-          100: 'var(--color-persian-green-100)',
-          200: 'var(--color-persian-green-200)',
-          300: 'var(--color-persian-green-300)',
-          400: 'var(--color-persian-green-400)',
-          500: 'var(--color-persian-green-500)',
-          600: 'var(--color-persian-green-600)',
-          700: 'var(--color-persian-green-700)',
-          800: 'var(--color-persian-green-800)',
-          900: 'var(--color-persian-green-900)',
-          950: 'var(--color-persian-green-950)',
+          50: '#f0fdfa',
+          100: '#ccfbf1', // Used for mobile menu button text
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6', // Used for mobile menu background
+          600: '#0d9488', // Used for header background
+          700: '#0f766e', // Used for hover states
+          800: '#115e59', // A potential dark mode variant for persian-green-600
+          900: '#134e4a',
+          950: '#042f2e',
         },
-        gray: {
-          50: 'var(--color-gray-50)',
-          100: 'var(--color-gray-100)',
-          200: 'var(--color-gray-200)',
-          300: 'var(--color-gray-300)',
-          400: 'var(--color-gray-400)',
-          500: 'var(--color-gray-500)',
-          600: 'var(--color-gray-600)',
-          700: 'var(--color-gray-700)',
-          800: 'var(--color-gray-800)',
-          900: 'var(--color-gray-900)',
-          950: 'var(--color-gray-950)',
-        },
-        'yellow-orange': {
-          50: 'var(--color-yellow-orange-50)',
-          100: 'var(--color-yellow-orange-100)',
-          200: 'var(--color-yellow-orange-200)',
-          300: 'var(--color-yellow-orange-300)',
-          400: 'var(--color-yellow-orange-400)',
-          500: 'var(--color-yellow-orange-500)',
-          600: 'var(--color-yellow-orange-600)',
-          700: 'var(--color-yellow-orange-700)',
-          800: 'var(--color-yellow-orange-800)',
-          900: 'var(--color-yellow-orange-900)',
-          950: 'var(--color-yellow-orange-950)',
-        },
-      },
-      fontFamily: {
-        body: ['Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
-        heading: ['Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
-        sans: ['Montserrat', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
-        serif: ['Georgia', 'serif'], // You can keep this or change it if needed
-        mono: ['Menlo', 'monospace'],  // You can keep this or change it if needed
-      },
+      }
     },
   },
-  plugins: [],
+  plugins: [
+    // Add any Tailwind plugins you are using here
+  ],
 }
