@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const images = ["/bag.png", "/babywalker.png", "/phone.png", "/print.png", "/mac.png"];

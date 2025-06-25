@@ -1,11 +1,11 @@
 <template>
   <!-- Loading State -->
-  <div v-if="isLoading">
+  <div v-if="isNavLoading">
     <header
       class="bg-persian-green-600 dark:bg-persian-green-800 flex justify-center items-center text-white dark:text-gray-100 p-4 shadow-md"
     >
       <div class="container mx-auto flex justify-center items-center">
-        <p class="text-white font-bold">Loading Navigation...</p>
+        <p class="text-white font-bold">Loading Navigation... </p>
       </div>
     </header>
     <!-- Gray bar is implicitly hidden during loading as it's in the v-else -->
@@ -91,15 +91,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, onBeforeUnmount } from "vue"; // Added onBeforeUnmount
 import { useAuthStore } from "@/stores/auth";
 import BaseLink from "@/components/BaseLink.vue";
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
 
 const authStore = useAuthStore();
-const isLoading = ref(true); // Initialize with loading state active
+const isNavLoading = useNavLoading();
 const isMobileMenuOpen = ref(false);
 
+let loadingTimeout: ReturnType<typeof setTimeout> | null = null;
+const LOADING_TIMEOUT_MS = 5000; // 5 seconds
 const navitems = computed(() => {
   return [
     { path: "/about", text: "About" },
@@ -111,19 +113,39 @@ const navitems = computed(() => {
 });
 
 onMounted(async () => {
+  // Start a timeout to force loading off if it takes too long
+  loadingTimeout = setTimeout(() => {
+    if (isNavLoading.value) {
+      console.warn('MainNav: Navigation setup timed out. Forcing loading state off.');
+      isNavLoading.value = false;
+    }
+  }, LOADING_TIMEOUT_MS);
+
   try {
     // Assuming authStore.user might be an async function to initialize or fetch user state
     if (authStore.user && typeof authStore.user === "function") {
       await authStore.user();
     }
   } catch (error) {
-    console.error("Error during main navigation setup:", error);
-    // Optionally, you could set an error state here to inform the user
+    console.error("MainNav: Error during main navigation setup:", error);
+    // Optionally, you could set an error state here to inform the user or log to an error tracking service
   } finally {
-    isLoading.value = false; // Deactivate loading state
+    // Ensure loading state is deactivated and clear the timeout
+    isNavLoading.value = false;
+    if (loadingTimeout) {
+      clearTimeout(loadingTimeout);
+      loadingTimeout = null;
+    }
   }
 });
 
+onBeforeUnmount(() => {
+  // Clear timeout if component is unmounted before it fires (e.g., route change)
+  if (loadingTimeout) {
+    clearTimeout(loadingTimeout);
+    loadingTimeout = null;
+  }
+});
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false;
 };

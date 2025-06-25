@@ -1,6 +1,7 @@
 <template>
   <Banner />
   <Services />
+  <Stats/>
   <FaqSection :faq-items="productsStore.getAllFaqs" @toggle="handleToggle" />
   <Quote />
 </template>

@@ -1,6 +1,6 @@
 <template>
   <section class="services-section container mx-auto py-8 md:py-12">
-    <h2 class="text-gray-800 font-bold text-2xl sm:text-3xl mb-6 md:mb-8 text-center">Our Services</h2>
+    <h2 class="text-yellow-orange-500 font-bold text-2xl sm:text-3xl mb-6 md:mb-8 text-center">Our Services</h2>
     <div class="relative">
       <!-- On mobile, this will be a scrollable container. On md+, it's the viewport for the JS carousel. -->
       <div
@@ -73,6 +73,7 @@ export default {
       translateX: 0,
       itemWidth: 0,
       isDesktopView: false, // Controls JS carousel behavior
+      autoScrollInterval: null, // To store the interval ID for auto-scrolling
     };
   },
   computed: {
@@ -85,23 +86,42 @@ export default {
     }
   },
   methods: {
+    startAutoScroll() {
+      this.stopAutoScroll(); // Clear any existing interval first to prevent duplicates
+      this.autoScrollInterval = setInterval(() => {
+        // Only auto-scroll if in desktop view and there are more items than currently visible
+        if (this.isDesktopView && this.services.length > this.currentVisibleCount) {
+          this.scrollRight(true); // Pass true to indicate auto-scroll, so it doesn't stop itself
+        }
+      }, 2000); // Auto-scroll every 2 seconds
+    },
+    stopAutoScroll() {
+      if (this.autoScrollInterval) {
+        clearInterval(this.autoScrollInterval);
+        this.autoScrollInterval = null;
+      }
+    },
     scrollLeft() {
       if (!this.isDesktopView || this.services.length <= this.currentVisibleCount) return;
 
-      this.currentIndex--;
+      this.stopAutoScroll(); // Stop auto-scroll on manual interaction
+      this.currentIndex--; // Move to the previous item
       if (this.currentIndex < 0) {
-        this.currentIndex = this.maxStartIndex; // Loop to the end
+        this.currentIndex = this.maxStartIndex; // Loop to the end if at the beginning
       }
       this.updateTranslateX();
+      setTimeout(() => this.startAutoScroll(), 5000); // Restart auto-scroll after 5 seconds of inactivity
     },
-    scrollRight() {
+    scrollRight(isAutoScroll = false) { // Added parameter to differentiate auto vs manual scroll
       if (!this.isDesktopView || this.services.length <= this.currentVisibleCount) return;
 
-      this.currentIndex++;
+      if (!isAutoScroll) this.stopAutoScroll(); // Only stop if it's a manual scroll
+      this.currentIndex++; // Move to the next item
       if (this.currentIndex > this.maxStartIndex) {
-        this.currentIndex = 0; // Loop to the beginning
+        this.currentIndex = 0; // Loop to the beginning if at the end
       }
       this.updateTranslateX();
+      if (!isAutoScroll) setTimeout(() => this.startAutoScroll(), 5000); // Restart auto-scroll after 5 seconds of inactivity
     },
     updateTranslateX() {
       if (this.isDesktopView) {
@@ -152,11 +172,13 @@ export default {
     },
   },
   mounted() {
-    this.handleResize(); // Initial calculation
+    this.handleResize(); // Initial calculation of view state and item width
+    this.startAutoScroll(); // Start auto-scrolling when the component mounts
     window.addEventListener('resize', this.handleResize);
   },
   beforeUnmount() {
-    window.removeEventListener('resize', this.handleResize);
+    this.stopAutoScroll(); // Stop auto-scrolling before component is unmounted
+    window.removeEventListener('resize', this.handleResize); // Remove resize listener
   },
 };
 </script>
