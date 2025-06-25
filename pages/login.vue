@@ -1,8 +1,9 @@
+<!-- pages/login.vue -->
 <template>
   <AuthCard title="Login to your account">
     <template #body>
       <BaseForm @submit="handleLogin">
-        <BaseHeading title="Login to your account" class="text-center mb-6" />
+        <!-- Removed duplicate BaseHeading, AuthCard title handles this. -->
         <BaseFormGroup
           id="email"
           label="Email Address"
@@ -49,31 +50,28 @@
       </BaseForm>
     </template>
     <template #footer>
-      <p class="text-sm text-center text-gray-300 dark:text-gray-500">
-        <BaseHeading :level="6" class="text-sm font-normal"> <!-- Added font-normal to match typical p tag -->
-          Don't have an account? <BaseLink to="/register">Register</BaseLink>
-        </BaseHeading>
+      <p class="text-sm text-center text-gray-500 dark:text-gray-400">
+        <!-- Replaced BaseHeading with a simple p tag and BaseLink for semantic correctness -->
+        Don't have an account? <BaseLink to="/register">Register</BaseLink>
       </p>
     </template>
   </AuthCard>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive } from 'vue'; // reactive is explicitly imported for clarity
 import { useAuthStore } from '~/stores/auth';
 // useRouter and useRoute are auto-imported by Nuxt 3
-// reactive is auto-imported by Vue 3 Composition API
 
+// Define the page metadata to use the new 'two-halves' layout.
 definePageMeta({
-    layout: 'auth',
-    middleware: 'guest',
+    layout: 'two-halves', // Use the new two-halves layout
+    // middleware: 'guest', // Uncomment if you have a 'guest' middleware configured
 });
 
 const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
-
-
 
 const formData = reactive({
   email: '',
@@ -91,29 +89,27 @@ const handleLogin = async () => {
   authStore.clearError(); // Clear previous errors
 
   try {
-    await authStore.login(formData.email, formData.password); // Pass formData directly or individual fields
+    await authStore.login(formData.email, formData.password);
 
     if (!authStore.error && authStore.isAuthenticated) {
       toastMessage.value = 'Login successful! Redirecting...';
       toastType.value = 'success';
       showToast.value = true;
 
-      // Determine redirect path
+      // Determine redirect path from query parameter or default to '/'
       const redirectPath = typeof route.query.redirect === 'string' && route.query.redirect ? route.query.redirect : '/';
 
       setTimeout(async () => {
         await router.push(redirectPath);
       }, 1500); // Delay for toast visibility
     } else if (authStore.error) {
-      // Error is already set in the store, BaseErrorMessage will display it
-      // Or, if you want a toast for errors too:
+      // If authStore.error is set, BaseErrorMessage will display it.
+      // You could also show a toast for errors here if desired:
       // toastMessage.value = authStore.error || 'Login failed. Please check your credentials.';
       // toastType.value = 'error';
       // showToast.value = true;
     }
   } catch (e) {
-    // This catch block might be redundant if authStore.login handles its own errors
-    // and sets authStore.error. But good for unexpected issues.
     console.error('Unexpected error during login:', e);
     toastMessage.value = 'An unexpected error occurred. Please try again.';
     toastType.value = 'error';
