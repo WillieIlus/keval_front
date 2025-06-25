@@ -2,7 +2,11 @@
   <ClientOnly>
     <BaseButton
       aria-label="Theme" 
-      @click="togglePreference" class="rounded-full bg-amber-200"
+      @click="togglePreference"
+      variant="primary"
+      rounded="full"
+      size="icon"
+      class="px-1 py-4"
     >
       <SunIcon v-if="colorMode.preference === 'light'" class="w-6 h-6 text-white " />
       <MoonIcon v-else-if="colorMode.preference === 'dark'" class="w-6 h-6 text-white " />

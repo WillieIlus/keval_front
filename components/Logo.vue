@@ -1,7 +1,7 @@
 <template>
-  <NuxtLink to="/" class="flex items-center space-x-3 rtl:space-x-reverse w-[230px]">
+  <NuxtLink to="/" class="flex items-center">
     <div class="flex items-center">
-      <img src="/logo.png" alt="Logo" class="h-8 mr-4">
+      <img src="/logo.png" alt="Logo" class="h-full">
     </div>
   </NuxtLink>
 </template>

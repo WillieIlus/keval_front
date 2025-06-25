@@ -1,25 +1,45 @@
 <template>
   <header
-    class="bg-persian-green-50 text-persian-green-800 p-4 shadow-md dark:bg-persian-green-900 dark:text-persian-green-200"
+    class="relative bg-persian-green-50 text-persian-green-800 p-4 shadow-md dark:bg-persian-green-900 dark:text-persian-green-200"
   >
-    <div class="container mx-auto flex justify-between items-center">
+    <div class="container mx-auto flex justify-between items-center px-4">
       <Logo />
 
-      <!-- Desktop Search and Navigation -->
-      <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
-        <SearchInput />
-        <nav>
+      <div class="hidden md:flex items-center flex-grow gap-2">
+        <SearchInput class="mr-auto" />
+        <nav class="flex items-center space-x-4 lg:space-x-6">
           <ul class="flex items-center space-x-3 lg:space-x-4">
-            <!-- Desktop nav items will use the same source, styling will adapt -->
             <BaseLink
-              v-for="item in navItems"
-              :key="item.text + '-desktop'"
+              v-for="item in leftNavItems"
+              :key="item.text + '-desktop-left'"
               :to="item.path || '#'"
               :external="!item.path"
               :icon="getIconComponent(item.iconName)"
               icon-position="left"
               @click="item.action && item.action()"
-              class="text-sm lg:text-base whitespace-nowrap"
+              class="px-2"
+              :class="{
+                'text-sm lg:text-base whitespace-nowrap': true,
+                'bg-orange-500 hover:bg-orange-700 text-white py-3 px-5 rounded-full ml-4':
+                  item.text === 'Get a quote',
+              }"
+            >
+              {{ item.text }}
+            </BaseLink>
+          </ul>
+          <ul
+            class="flex items-center space-x-3 lg:space-x-4 ml-6"
+            v-if="rightNavItems.length > 0"
+          >
+            <BaseLink
+              v-for="item in rightNavItems"
+              :key="item.text + '-desktop-right'"
+              :to="item.path || '#'"
+              :external="!item.path"
+              :icon="getIconComponent(item.iconName)"
+              icon-position="left"
+              @click="item.action && item.action()"
+              class="px-2 text-sm lg:text-base whitespace-nowrap"
             >
               {{ item.text }}
             </BaseLink>
@@ -27,10 +47,8 @@
         </nav>
       </div>
 
-      <!-- Right-aligned items: DarkModeToggle and Mobile Menu Button -->
       <div class="flex items-center space-x-2">
-        <DarkModeToggle icon="i-heroicons-sun-solid"/>
-        <!-- Mobile menu button -->
+        <DarkModeToggle icon="i-heroicons-sun-solid" />
         <button
           @click="isMobileMenuOpen = !isMobileMenuOpen"
           type="button"
@@ -45,28 +63,57 @@
       </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
     <Transition
-      enter-active-class="transition ease-out duration-200"
-      enter-from-class="opacity-0 -translate-y-1"
+      enter-active-class="transition ease-out duration-300 transform"
+      enter-from-class="opacity-0 -translate-y-4"
       enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition ease-in duration-150"
+      leave-active-class="transition ease-in duration-200 transform"
       leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-1"
+      leave-to-class="opacity-0 -translate-y-4"
     >
-      <div v-if="isMobileMenuOpen" class="md:hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-3 sm:px-3 mt-3 bg-persian-green-100 dark:bg-persian-green-800 rounded-lg shadow-lg">
-          <SearchInput class="w-full" />
+      <div
+        v-if="isMobileMenuOpen"
+        class="absolute z-20 top-full left-0 right-0 md:hidden"
+        id="mobile-menu"
+      >
+        <div
+          class="mx-4 mt-2 p-4 space-y-4 bg-persian-green-100 dark:bg-persian-green-800 rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
+        >
+          <SearchInput class="w-full px-6 mx-auto" />
           <nav class="space-y-1">
+            <!-- Main nav items (excluding login/signup) -->
             <BaseLink
-              v-for="item in navItems"
-              :key="item.text + '-mobile'"
+              v-for="item in navItems.filter(
+                (i) => i.text !== 'Login' && i.text !== 'Sign Up'
+              )"
+              :key="item.text + '-mobile-main'"
               :to="item.path || '#'"
               :external="!item.path"
               :icon="getIconComponent(item.iconName)"
               icon-position="left"
               @click="handleMobileLinkClick(item)"
-              class="block px-3 py-2 rounded-md text-base font-medium hover:bg-persian-green-200 dark:hover:bg-persian-green-700"
+              class="w-full block px-3 py-2 rounded-md text-base font-medium hover:bg-persian-green-200 dark:hover:bg-persian-green-700"
+            >
+              {{ item.text }}
+            </BaseLink>
+
+            <!-- Divider -->
+            <hr
+              class="border-t border-persian-green-300 dark:border-persian-green-600 my-3"
+            />
+
+            <!-- Auth items (Login/Sign Up) -->
+            <BaseLink
+              v-for="item in navItems.filter(
+                (i) => i.text === 'Login' || i.text === 'Sign Up'
+              )"
+              :key="item.text + '-mobile-auth'"
+              :to="item.path || '#'"
+              :external="!item.path"
+              :icon="getIconComponent(item.iconName)"
+              icon-position="left"
+              @click="handleMobileLinkClick(item)"
+              class="w-full block px-3 py-2 rounded-md text-base font-medium hover:bg-persian-green-200 dark:hover:bg-persian-green-700"
             >
               {{ item.text }}
             </BaseLink>
@@ -141,11 +188,15 @@ const getIconComponent = (iconString: string | undefined) => {
 
 const isMobileMenuOpen = ref(false);
 
-// Computed property for navigation items based on authentication status
-const navItems = computed<NavItem[]>(() => {
+// Computed property for all navigation items
+const allNavItems = computed<NavItem[]>(() => {
   if (isAuthenticated.value) {
     return [
-      { path: "/quote", text: "Get a quote", iconName: "i-heroicons-squares-2x2-solid" },
+      {
+        path: "/quote",
+        text: "Get a quote",
+        iconName: "i-heroicons-rectangle-stack-solid",
+      },
       { path: "/call", text: "+254 711 635104", iconName: "i-heroicons-phone-solid" },
       { path: "/Cart", text: "Cart", iconName: "i-heroicons-shopping-cart-solid" },
       { path: "/profile", text: "Profile", iconName: "i-heroicons-user-circle-solid" },
@@ -158,7 +209,11 @@ const navItems = computed<NavItem[]>(() => {
     ];
   } else {
     return [
-      { path: "/quote", text: "Get a quote", iconName: "i-heroicons-squares-2x2-solid" },
+      {
+        path: "/quote",
+        text: "Get a quote",
+        iconName: "i-heroicons-rectangle-stack-solid",
+      },
       { path: "/call", text: "Call", iconName: "i-heroicons-phone-solid" },
       { path: "/Cart", text: "Cart", iconName: "i-heroicons-shopping-cart-solid" },
       {
@@ -174,6 +229,30 @@ const navItems = computed<NavItem[]>(() => {
     ];
   }
 });
+
+// New computed properties for desktop layout separation
+const leftNavItems = computed<NavItem[]>(() => {
+  if (isAuthenticated.value) {
+    return allNavItems.value; // All items go to left when authenticated
+  } else {
+    return allNavItems.value.filter(
+      (item) => item.text !== "Login" && item.text !== "Sign Up"
+    );
+  }
+});
+
+const rightNavItems = computed<NavItem[]>(() => {
+  if (isAuthenticated.value) {
+    return []; // No items on the right when authenticated
+  } else {
+    return allNavItems.value.filter(
+      (item) => item.text === "Login" || item.text === "Sign Up"
+    );
+  }
+});
+
+// navItems for mobile (all items combined)
+const navItems = allNavItems;
 
 const handleLogout = async () => {
   await authStore.logout();

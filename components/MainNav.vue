@@ -46,7 +46,11 @@
             :aria-expanded="isMobileMenuOpen.toString()"
           >
             <span class="sr-only">Open main menu</span>
-            <Bars3Icon v-if="!isMobileMenuOpen" class="block h-6 w-6" aria-hidden="true" />
+            <Bars3Icon
+              v-if="!isMobileMenuOpen"
+              class="block h-6 w-6"
+              aria-hidden="true"
+            />
             <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
           </button>
         </div>
@@ -62,19 +66,23 @@
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-1"
     >
-      <div v-if="isMobileMenuOpen" class="md:hidden bg-persian-green-500 dark:bg-persian-green-700" id="mobile-main-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <nav
+        v-if="isMobileMenuOpen"
+        class="md:hidden bg-persian-green-500 dark:bg-persian-green-700 w-full"
+        id="mobile-main-menu"
+      >
+        <div class="flex flex-col px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <BaseLink
             v-for="item in navitems"
             :key="item.path + '-mobile'"
             :to="item.path"
             @click="closeMobileMenu"
-            class="block px-3 py-2 rounded-md text-base font-medium text-white dark:text-gray-100 hover:bg-persian-green-700 dark:hover:bg-persian-green-600 hover:text-white dark:hover:text-gray-50"
+            class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white dark:text-gray-100 hover:bg-persian-green-700 dark:hover:bg-persian-green-600 hover:text-white dark:hover:text-gray-50"
           >
             {{ item.text }}
           </BaseLink>
         </div>
-      </div>
+      </nav>
     </Transition>
 
     <!-- Gray Bar: Hidden on mobile, shown on md and up. Responsive margin. -->
@@ -105,7 +113,7 @@ const navitems = computed(() => {
 onMounted(async () => {
   try {
     // Assuming authStore.user might be an async function to initialize or fetch user state
-    if (authStore.user && typeof authStore.user === 'function') {
+    if (authStore.user && typeof authStore.user === "function") {
       await authStore.user();
     }
   } catch (error) {
