@@ -4,7 +4,10 @@ const authStore = useAuthStore();
 </script>
 
 <template>
-  <TopNav />
-  <MainNav />
+  <div class="sticky top-0 z-50">
+    <TopNav />
+    <MainNav />
+  </div>
   <slot />
+  <BaseFooter/>
 </template>

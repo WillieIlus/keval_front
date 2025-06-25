@@ -18,9 +18,9 @@
           <div v-for="(service) in services" :key="service.name"
                class="service-item-wrapper flex-shrink-0 px-2 scroll-snap-align-start
                       w-4/5 sm:w-2/5 md:w-1/3 lg:w-1/4 xl:w-1/5"
-               ref="serviceItems">
-            <div class="service-content bg-gray-50 rounded-lg shadow-md p-4 text-center h-full flex flex-col" role="option" :aria-label="service.name">
-              <img :src="service.image" :alt="`${service.name} service`" class="w-full h-32 sm:h-36 md:h-40 object-cover rounded-md mb-4" />
+               ref="serviceItems" tabindex="0">
+            <div class="service-content bg-gray-50 rounded-lg shadow-md p-4 text-center h-full flex flex-col group" role="option" :aria-label="service.name">
+              <img :src="service.image" :alt="`${service.name} service`" class="w-full h-32 sm:h-36 md:h-40 object-cover rounded-md mb-4 transition-transform duration-300 group-hover:scale-105" />
               <h3 class="font-semibold text-gray-700 text-base sm:text-lg mt-auto">{{ service.name }}</h3>
             </div>
           </div>
