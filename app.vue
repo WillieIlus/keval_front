@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtLayout :name="isNavLoading ? 'loading' : 'default'">
+    <NuxtLayout :name="layoutName">
       <NuxtPage />
     </NuxtLayout>
   </div>
@@ -8,10 +8,21 @@
 
 <script setup lang="ts">
 const isNavLoading = useNavLoading();
+const route = useRoute();
 
-// Set a timeout to turn off the loading state after 30 seconds
+const layoutName = computed(() => {
+  if (isNavLoading.value) {
+    return 'loading';
+  }
+  // When not loading, we let Nuxt handle the layout.
+  // `route.meta.layout` will be the name of the layout file (e.g., 'auth')
+  // or undefined, in which case NuxtLayout falls back to the 'default' layout.
+  return route.meta.layout as string | undefined;
+});
+
+// Set a timeout to turn off the loading state after 5 seconds
 let loadingTimeout: ReturnType<typeof setTimeout> | null = null;
-const LOADING_TIMEOUT_MS = 10000; // 30 seconds
+const LOADING_TIMEOUT_MS = 5000;
 
 onMounted(() => {
   loadingTimeout = setTimeout(() => {
@@ -20,5 +31,11 @@ onMounted(() => {
       isNavLoading.value = false;
     }
   }, LOADING_TIMEOUT_MS);
+});
+
+onUnmounted(() => {
+  if (loadingTimeout) {
+    clearTimeout(loadingTimeout);
+  }
 });
 </script>

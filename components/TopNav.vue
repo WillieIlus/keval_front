@@ -217,14 +217,14 @@ const allNavItems = computed<NavItem[]>(() => {
       { path: "/call", text: "Call", iconName: "i-heroicons-phone-solid" },
       { path: "/Cart", text: "Cart", iconName: "i-heroicons-shopping-cart-solid" },
       {
+        path: "/login",
         text: "Login",
         iconName: "i-heroicons-arrow-right-on-rectangle-solid",
-        action: () => openmodel("login"),
       },
       {
+        path: "/register",
         text: "Sign Up",
         iconName: "i-heroicons-user-plus-solid",
-        action: () => openmodel("signup"),
       },
     ];
   }

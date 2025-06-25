@@ -16,22 +16,44 @@ export const useAuthStore = defineStore('auth', () => {
   const isLoggedIn = computed(() => isAuthenticated.value && !!token.value);
   const userEmail = computed(() => user.value?.email || 'Guest');
 
+  // Helper to clear errors
+  function clearError() {
+    error.value = null;
+  }
+
   // Actions
   async function register(userData) {
     loading.value = true;
-    error.value = null;
+    clearError();
     try {
-      const config = useRuntimeConfig();
-      const response = await fetch(`${BASE_URL}/auth/jwt/create?/`, {
+      // Djoser expects 're_password' for password confirmation
+      const payload = {
+        email: userData.email,
+        password: userData.password,
+        re_password: userData.password2,
+      };
+
+      const response = await fetch(`${BASE_URL}/auth/users/`, {
         method: 'POST',
-        body: userData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
-      user.value = response.user;
-      token.value = response.token; // Or however your API returns the token
-      isAuthenticated.value = true;
-      return response;
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Djoser often returns errors with field names as keys
+        const errorMessages = Object.entries(data).map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(', ') : value}`).join(' ');
+        throw new Error(errorMessages || 'Registration failed.');
+      }
+      
+      // Registration is successful, but user is not logged in.
+      // The component will redirect to the login page.
+      return data;
     } catch (e) {
-      error.value = e.data?.detail || 'Registration failed.';
+      error.value = e.message || 'An unknown error occurred during registration.';
       console.error('Registration error:', e);
       throw e;
     } finally {
@@ -41,19 +63,27 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(credentials) {
     loading.value = true;
-    error.value = null;
+    clearError();
     try {
-      const config = useRuntimeConfig();
-      const response = await fetch(`${BASE_URL}/auth/jwt/create?/`, {
+      const response = await fetch(`${BASE_URL}/auth/jwt/create/`, {
         method: 'POST',
-        body: credentials,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
       });
-      token.value = response.access;
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Login failed. Invalid credentials.');
+      }
+
+      token.value = data.access;
       await fetchUserProfile();
-      isAuthenticated.value = true;
-      return response;
+      return data;
     } catch (e) {
-      error.value = e.data?.detail || 'Login failed. Invalid credentials.';
+      error.value = e.message || 'Login failed. Invalid credentials.';
       console.error('Login error:', e);
       throw e;
     } finally {
@@ -63,23 +93,29 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function fetchUserProfile() {
     if (!token.value) {
-      user.value = null;
-      isAuthenticated.value = false;
+      logout();
       return;
     }
     loading.value = true;
-    error.value = null;
+    clearError();
     try {
-      const config = useRuntimeConfig();
-      const response = await fetch(`${BASE_URL}/auth/jwt/create?/`, {
+      const response = await fetch(`${BASE_URL}/auth/users/me/`, {
         headers: {
-          'Authorization': `Bearer ${token.value}`
+          'Authorization': `Bearer ${token.value}`,
+          'Content-Type': 'application/json',
         }
       });
-      user.value = response;
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Failed to fetch user profile.');
+      }
+
+      user.value = data;
       isAuthenticated.value = true;
     } catch (e) {
-      error.value = e.data?.detail || 'Failed to fetch user profile.';
+      error.value = e.message || 'Failed to fetch user profile.';
       console.error('Fetch profile error:', e);
       logout(); // Logout if token is invalid or expired
       throw e;
@@ -107,6 +143,7 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     fetchUserProfile,
     logout,
+    clearError,
   };
 }, {
   // Enable persistent state for this store

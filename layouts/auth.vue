@@ -1,57 +1,58 @@
 <!-- layouts/two-halves.vue -->
 <template>
-  <!-- Main container for the two-half layout.
-       Uses flexbox to arrange content horizontally.
-       min-h-screen ensures it takes at least the full viewport height.
-       bg-gray-200 provides a light background for the whole page. -->
-  <div class="flex min-h-screen bg-gray-200 dark:bg-gray-900 font-sans">
-    <!-- Left Half: Contains the authentication forms (Login/Register) -->
-    <!-- It takes full width on small screens and half width on large screens (lg:w-1/2).
-         flex, items-center, justify-center are used to center the content vertically and horizontally within this half.
-         p-4 adds padding around the content. -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-4">
-      <!-- This 'main' element wraps your existing AuthCard.
-           It applies the styles you had in your original auth layout (bg-primary, rounded-lg, shadow-lg).
-           w-full ensures it takes the available width within its parent flex item.
-           max-w-sm and mx-auto constrain its maximum width and center it horizontally
-           within the left half, making it look good even on very large screens. -->
-      <main class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-sm mx-auto">
-        <!-- The <slot /> renders the content from your login.vue or register.vue pages -->
+  <!-- Main container for the two-section layout -->
+  <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+    
+    <!-- LEFT SECTION: Authentication Forms -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 bg-white dark:bg-gray-800">
+      <div class="w-full max-w-md">
+        <!-- Slot for login/signup forms -->
         <slot />
-      </main>
+      </div>
     </div>
 
-    <!-- Right Half: A decorative section with marketing content or an image -->
-    <!-- hidden on small screens and only shown on large screens (lg:flex).
-         Takes half width on large screens (lg:w-1/2).
-         Applies a pleasant gradient background.
-         Uses flexbox to center its internal content. -->
-    <div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 to-purple-700 items-center justify-center p-8 rounded-l-3xl shadow-inner">
-      <div class="text-white text-center p-4">
-        <h2 class="text-4xl font-extrabold mb-4 animate-fade-in-down">Welcome to Our Platform!</h2>
-        <p class="text-lg leading-relaxed mb-8 opacity-90 animate-fade-in-up">
-          Seamlessly manage your accounts, discover new possibilities, and stay connected.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in-up delay-200">
-          <div class="flex flex-col items-center">
-            <!-- Icon for Easy Setup -->
-            <svg class="w-16 h-16 mb-3 text-white transform hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 15.5l-5-5 1.41-1.41L11 14.6l7.09-7.09L19.5 8.5l-8.5 8.5z"/></svg>
-            <span class="text-sm font-semibold opacity-90">Easy Setup</span>
-          </div>
-          <div class="flex flex-col items-center">
-            <!-- Icon for Secure & Reliable -->
-            <svg class="w-16 h-16 mb-3 text-white transform hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm-1-13h2v6h-2v-6zm0 8h2v2h-2v-2z"/></svg>
-            <span class="text-sm font-semibold opacity-90">Secure & Reliable</span>
+    <!-- RIGHT SECTION: Background Image with Overlay Content -->
+    <div class="hidden lg:flex lg:w-1/2 relative bg-cover bg-center bg-no-repeat bg-persian-green-600" 
+         style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');">
+      
+      <!-- Dark overlay for better text readability -->
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      
+      <!-- Content overlay -->
+      <div class="relative z-10 flex items-center justify-center p-8 text-white">
+        <div class="text-center max-w-lg">
+          <h2 class="text-4xl font-bold mb-6 animate-fade-in-down">
+            Welcome Back
+          </h2>
+          <p class="text-xl leading-relaxed mb-8 opacity-90 animate-fade-in-up">
+            Join thousands of users who trust our platform for secure and seamless experiences.
+          </p>
+          
+          <!-- Feature highlights -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fade-in-up delay-200">
+            <div class="flex flex-col items-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+              <svg class="w-12 h-12 mb-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.11 7 14 7.89 14 9C14 10.11 13.11 11 12 11C10.89 11 10 10.11 10 9C10 7.89 10.89 7 12 7M12 14.5C14.38 14.5 16.5 15.56 16.5 17V18.5H7.5V17C7.5 15.56 9.62 14.5 12 14.5Z"/>
+              </svg>
+              <span class="text-sm font-semibold">Secure Access</span>
+            </div>
+            
+            <div class="flex flex-col items-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+              <svg class="w-12 h-12 mb-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+              </svg>
+              <span class="text-sm font-semibold">24/7 Support</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
-
-<style>
-/* Basic animations for the right panel content to make it more engaging */
+<style scoped>
+/* Animations */
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -85,6 +86,12 @@
 .delay-200 {
   animation-delay: 0.2s;
 }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  /* On mobile, only show the left section */
+  .hidden.lg\\:flex {
+    display: none !important;
+  }
+}
 </style>
-
-

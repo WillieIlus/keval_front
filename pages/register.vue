@@ -38,9 +38,9 @@ import { ref, reactive } from 'vue'; // reactive is explicitly imported for clar
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 
-// Define the page metadata to use the new 'two-halves' layout.
 definePageMeta({
-    layout: 'two-halves', // Use the new two-halves layout
+    layout: 'auth', 
+    // middleware: 'guest', // To prevent access when logged in
 });
 
 const authStore = useAuthStore();
@@ -59,37 +59,42 @@ const toastType = ref<'success' | 'error' | 'info'>('success');
 
 const handleRegister = async () => {
   showToast.value = false; // Reset/hide any previous toast
+  authStore.clearError(); // Clear previous errors from the store
+
   try {
     // Ensure passwords match before attempting registration
     if (formData.password !== formData.password2) {
-      authStore.setError('Passwords do not match.'); // Assuming your authStore has a setError method
-      toastMessage.value = 'Passwords do not match.';
+      const errorMsg = 'Passwords do not match.';
+      authStore.error = errorMsg; // Manually set store error for BaseErrorMessage
+      toastMessage.value = errorMsg;
       toastType.value = 'error';
       showToast.value = true;
       return; // Stop execution if passwords don't match
     }
 
-    await authStore.register(formData.email, formData.password); // Pass individual fields if register expects them
+    // The store's register action now expects the whole formData object
+    await authStore.register(formData);
 
     if (!authStore.error) { // Check if there was no error set by the store action
       toastMessage.value = 'Registration successful! Please log in.';
       toastType.value = 'success';
       showToast.value = true;
-      // Delay navigation to allow the user to see the toast
       setTimeout(() => {
         router.push('/login');
-      }, 2500); // Adjust delay as needed
+      }, 2500);
     } else {
-      // If authStore.error is set, it will be displayed by BaseErrorMessage.
-      // You could also show a toast for errors here if desired:
-      // toastMessage.value = authStore.error || 'Registration failed. Please try again.';
-      // toastType.value = 'error';
-      // showToast.value = true;
+      // If authStore.error is set by the action, show it in a toast.
+      // BaseErrorMessage will also display it.
+      toastMessage.value = authStore.error;
+      toastType.value = 'error';
+      showToast.value = true;
     }
 
   } catch (e) {
-    console.error('Unexpected error during registration:', e);
-    toastMessage.value = 'An unexpected error occurred. Please try again.';
+    // The store action already sets the error, so this catch is for other issues.
+    // The error message from the store is likely more user-friendly.
+    console.error('Component-level error during registration:', e);
+    toastMessage.value = authStore.error || 'An unexpected error occurred.';
     toastType.value = 'error';
     showToast.value = true;
   }

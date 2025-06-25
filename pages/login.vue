@@ -63,10 +63,9 @@ import { ref, reactive } from 'vue'; // reactive is explicitly imported for clar
 import { useAuthStore } from '~/stores/auth';
 // useRouter and useRoute are auto-imported by Nuxt 3
 
-// Define the page metadata to use the new 'two-halves' layout.
 definePageMeta({
-    layout: 'two-halves', // Use the new two-halves layout
-    // middleware: 'guest', // Uncomment if you have a 'guest' middleware configured
+    layout: 'auth', 
+    // middleware: 'guest', // To prevent access when logged in
 });
 
 const authStore = useAuthStore();
