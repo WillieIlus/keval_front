@@ -222,28 +222,28 @@
           </div>
 
           <!-- Legal Links -->
-          <nav class="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
+          <nav class="space-y-2 text-sm text-center md:text-right">
             <BaseLink 
               to="/privacy-policy" 
-              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Privacy Policy
             </BaseLink>
             <BaseLink 
               to="/terms-of-service" 
-              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Terms of Service
             </BaseLink>
             <BaseLink 
               to="/cookie-policy" 
-              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Cookie Policy
             </BaseLink>
             <BaseLink 
               to="/sitemap" 
-              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Sitemap
             </BaseLink>
