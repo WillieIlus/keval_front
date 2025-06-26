@@ -12,11 +12,10 @@
     </div>
 
     <!-- RIGHT SECTION: Background Image with Overlay Content -->
-    <div class="hidden lg:flex lg:w-1/2 relative bg-cover bg-center bg-no-repeat bg-persian-green-600" 
-         style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');">
+    <div class="hidden lg:flex lg:w-1/2 relative bg-cover bg-center bg-no-repeat background-section">
       
       <!-- Dark overlay for better text readability -->
-      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <div class="absolute inset-0 bg-gray-900 bg-opacity-30"></div>
       
       <!-- Content overlay -->
       <div class="relative z-10 flex items-center justify-center p-8 text-white">
@@ -52,6 +51,12 @@
 </template>
 
 <style scoped>
+/* Background image styling */
+.background-section {
+  background-image: url('/3d-rendering-chair-melting.jpg');
+  background-color: #ef4444; /* Fallback red color */
+}
+
 /* Animations */
 @keyframes fadeInDown {
   from {

@@ -8,24 +8,24 @@
         <div class="lg:col-span-1">
           <div class="mb-6">
             <!-- Logo/Company Name -->
-            <h3 class="text-xl font-bold text-white mb-4">PrintCraft Pro</h3>
-            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+            <h3 class="text-xl font-bold text-white mb-4">Keval Investment Limited</h3>
+            <p class="text-gray-100 text-sm leading-relaxed mb-4">
               Your trusted partner for professional printing and design services. Quality printing solutions for businesses and individuals.
             </p>
             
             <!-- Contact Info -->
-            <div class="space-y-2 text-sm text-gray-300">
+            <div class="space-y-2 text-sm text-gray-100">
               <div class="flex items-center">
                 <PhoneIcon class="h-4 w-4 mr-2 text-persian-green-400" />
-                <span>+254 (0) 700 000 000</span>
+                <span>0720 335 863 | 0711 635 104</span>
               </div>
               <div class="flex items-center">
                 <EnvelopeIcon class="h-4 w-4 mr-2 text-persian-green-400" />
-                <span>info@printcraftpro.com</span>
+                <span>kevalinvestmentsltd@gmail.com</span>
               </div>
               <div class="flex items-start">
                 <MapPinIcon class="h-4 w-4 mr-2 text-persian-green-400 mt-0.5" />
-                <span>Nairobi, Kenya</span>
+                <span>Print Hub Building, GroundFloor, Room No: B06<br>Kweria Road, Nairobi</span>
               </div>
             </div>
           </div>
@@ -37,31 +37,31 @@
           <nav class="space-y-2">
             <BaseLink 
               to="/" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Home
             </BaseLink>
             <BaseLink 
               to="/products" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Products
             </BaseLink>
             <BaseLink 
               to="/design/packages" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Design Services
             </BaseLink>
             <BaseLink 
               to="/portfolio" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Portfolio
             </BaseLink>
             <BaseLink 
               to="/contact" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Contact
             </BaseLink>
@@ -74,37 +74,37 @@
           <nav class="space-y-2">
             <BaseLink 
               to="/products/business-cards" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Business Cards
             </BaseLink>
             <BaseLink 
               to="/products/banners" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Banners & Signs
             </BaseLink>
             <BaseLink 
               to="/products/flyers-brochures" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Flyers & Brochures
             </BaseLink>
             <BaseLink 
               to="/design/packages" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Design Packages
             </BaseLink>
             <BaseLink 
               to="/products/custom-printing" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Custom Printing
             </BaseLink>
             <BaseLink 
               to="/quote" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Bulk Orders
             </BaseLink>
@@ -117,25 +117,25 @@
           <nav class="space-y-2 mb-6">
             <BaseLink 
               to="/faq" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               FAQ
             </BaseLink>
             <BaseLink 
               to="/testimonials" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Testimonials
             </BaseLink>
             <BaseLink 
               to="/order-tracking" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               Order Tracking
             </BaseLink>
             <BaseLink 
               to="/about" 
-              class="block text-gray-300 hover:text-persian-green-400 text-sm transition-colors duration-200"
+              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
             >
               About Us
             </BaseLink>
@@ -146,8 +146,8 @@
             <h5 class="text-sm font-semibold text-white mb-2">Follow Us</h5>
             <div class="flex space-x-3">
               <a 
-                href="#" 
-                class="text-gray-300 hover:text-persian-green-400 transition-colors duration-200"
+                href="https://facebook.com/kevalinvestments" 
+                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="Facebook"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -155,8 +155,8 @@
                 </svg>
               </a>
               <a 
-                href="#" 
-                class="text-gray-300 hover:text-persian-green-400 transition-colors duration-200"
+                href="https://twitter.com/kevalinvestments" 
+                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="Twitter"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -164,8 +164,8 @@
                 </svg>
               </a>
               <a 
-                href="#" 
-                class="text-gray-300 hover:text-persian-green-400 transition-colors duration-200"
+                href="https://instagram.com/kevalinvestments" 
+                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -173,8 +173,8 @@
                 </svg>
               </a>
               <a 
-                href="#" 
-                class="text-gray-300 hover:text-persian-green-400 transition-colors duration-200"
+                href="https://linkedin.com/kevalinvestments" 
+                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="LinkedIn"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -192,7 +192,7 @@
       <div class="container mx-auto px-4 py-8">
         <div class="max-w-2xl mx-auto text-center">
           <h4 class="text-lg font-semibold text-white mb-2">Stay Updated</h4>
-          <p class="text-gray-400 text-sm mb-4">Get the latest printing tips, design trends, and special offers delivered to your inbox.</p>
+          <p class="text-gray-200 text-sm mb-4">Get the latest printing tips, design trends, and special offers delivered to your inbox.</p>
           
           <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input 
@@ -217,33 +217,33 @@
         <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           
           <!-- Copyright -->
-          <div class="text-sm text-gray-400 text-center md:text-left">
-            © {{ currentYear }} PrintCraft Pro. All rights reserved.
+          <div class="text-sm text-gray-200 text-center md:text-left">
+            © {{ currentYear }} Keval Investment Limited. All rights reserved.
           </div>
 
           <!-- Legal Links -->
           <nav class="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
             <BaseLink 
               to="/privacy-policy" 
-              class="text-gray-400 hover:text-persian-green-400 transition-colors duration-200"
+              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Privacy Policy
             </BaseLink>
             <BaseLink 
               to="/terms-of-service" 
-              class="text-gray-400 hover:text-persian-green-400 transition-colors duration-200"
+              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Terms of Service
             </BaseLink>
             <BaseLink 
               to="/cookie-policy" 
-              class="text-gray-400 hover:text-persian-green-400 transition-colors duration-200"
+              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Cookie Policy
             </BaseLink>
             <BaseLink 
               to="/sitemap" 
-              class="text-gray-400 hover:text-persian-green-400 transition-colors duration-200"
+              class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
             >
               Sitemap
             </BaseLink>
