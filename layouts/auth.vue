@@ -15,7 +15,7 @@
     <div class="hidden lg:flex lg:w-1/2 relative bg-cover bg-center bg-no-repeat background-section">
       
       <!-- Dark overlay for better text readability -->
-      <div class="absolute inset-0 bg-gray-900 bg-opacity-30"></div>
+      <div class="absolute inset-0 "></div>
       
       <!-- Content overlay -->
       <div class="relative z-10 flex items-center justify-center p-8 text-white">
@@ -29,24 +29,19 @@
           
           <!-- Feature highlights -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 animate-fade-in-up delay-200">
-            <div class="flex flex-col items-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
-              <svg class="w-12 h-12 mb-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.11 7 14 7.89 14 9C14 10.11 13.11 11 12 11C10.89 11 10 10.11 10 9C10 7.89 10.89 7 12 7M12 14.5C14.38 14.5 16.5 15.56 16.5 17V18.5H7.5V17C7.5 15.56 9.62 14.5 12 14.5Z"/>
-              </svg>
+            <div class="flex flex-col items-center p-4  rounded-lg backdrop-blur-sm">
+              <LockClosedIcon class="w-12 h-12 mb-3 text-persian-green-300" />
               <span class="text-sm font-semibold">Secure Access</span>
             </div>
             
-            <div class="flex flex-col items-center p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
-              <svg class="w-12 h-12 mb-3 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
-              </svg>
+            <div class="flex flex-col items-center p-4  rounded-lg backdrop-blur-sm">
+              <LifebuoyIcon class="w-12 h-12 mb-3 text-persian-green-300" />
               <span class="text-sm font-semibold">24/7 Support</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -100,3 +95,7 @@
   }
 }
 </style>
+
+<script setup lang="ts">
+import { LockClosedIcon, LifebuoyIcon } from '@heroicons/vue/24/outline';
+</script>
