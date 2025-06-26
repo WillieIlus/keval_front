@@ -36,33 +36,33 @@
           <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
           <nav class="space-y-2">
             <BaseLink 
-              to="/" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/"
+              variant="inverse"
+              class="block w-full text-sm">
               Home
             </BaseLink>
             <BaseLink 
-              to="/products" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/products"
+              variant="inverse"
+              class="block w-full text-sm">
               Products
             </BaseLink>
             <BaseLink 
-              to="/design/packages" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/design/packages"
+              variant="inverse"
+              class="block w-full text-sm">
               Design Services
             </BaseLink>
             <BaseLink 
-              to="/portfolio" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/portfolio"
+              variant="inverse"
+              class="block w-full text-sm">
               Portfolio
             </BaseLink>
             <BaseLink 
-              to="/contact" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/contact"
+              variant="inverse"
+              class="block w-full text-sm">
               Contact
             </BaseLink>
           </nav>
@@ -73,39 +73,39 @@
           <h4 class="text-lg font-semibold text-white mb-4">Services</h4>
           <nav class="space-y-2">
             <BaseLink 
-              to="/products/business-cards" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/products/business-cards"
+              variant="inverse"
+              class="block w-full text-sm">
               Business Cards
             </BaseLink>
             <BaseLink 
-              to="/products/banners" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/products/banners"
+              variant="inverse"
+              class="block w-full text-sm">
               Banners & Signs
             </BaseLink>
             <BaseLink 
-              to="/products/flyers-brochures" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/products/flyers-brochures"
+              variant="inverse"
+              class="block w-full text-sm">
               Flyers & Brochures
             </BaseLink>
             <BaseLink 
-              to="/design/packages" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/design/packages"
+              variant="inverse"
+              class="block w-full text-sm">
               Design Packages
             </BaseLink>
             <BaseLink 
-              to="/products/custom-printing" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/products/custom-printing"
+              variant="inverse"
+              class="block w-full text-sm">
               Custom Printing
             </BaseLink>
             <BaseLink 
-              to="/quote" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/quote"
+              variant="inverse"
+              class="block w-full text-sm">
               Bulk Orders
             </BaseLink>
           </nav>
@@ -116,27 +116,27 @@
           <h4 class="text-lg font-semibold text-white mb-4">Support</h4>
           <nav class="space-y-2 mb-6">
             <BaseLink 
-              to="/faq" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/faq"
+              variant="inverse"
+              class="block w-full text-sm">
               FAQ
             </BaseLink>
             <BaseLink 
-              to="/testimonials" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/testimonials"
+              variant="inverse"
+              class="block w-full text-sm">
               Testimonials
             </BaseLink>
             <BaseLink 
-              to="/order-tracking" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/order-tracking"
+              variant="inverse"
+              class="block w-full text-sm">
               Order Tracking
             </BaseLink>
             <BaseLink 
-              to="/about" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline text-sm transition-colors duration-200"
-            >
+              to="/about"
+              variant="inverse"
+              class="block w-full text-sm">
               About Us
             </BaseLink>
           </nav>
@@ -147,7 +147,7 @@
             <div class="flex space-x-3">
               <a 
                 href="https://facebook.com/kevalinvestments" 
-                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+                class="text-gray-50 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="Facebook"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -156,7 +156,7 @@
               </a>
               <a 
                 href="https://twitter.com/kevalinvestments" 
-                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+                class="text-gray-50 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="Twitter"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -165,7 +165,7 @@
               </a>
               <a 
                 href="https://instagram.com/kevalinvestments" 
-                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+                class="text-gray-50 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="Instagram"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -174,7 +174,7 @@
               </a>
               <a 
                 href="https://linkedin.com/kevalinvestments" 
-                class="text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
+                class="text-gray-50 hover:text-persian-green-400 hover:underline transition-colors duration-200"
                 aria-label="LinkedIn"
               >
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -224,27 +224,27 @@
           <!-- Legal Links -->
           <nav class="space-y-2 text-sm text-center md:text-right">
             <BaseLink 
-              to="/privacy-policy" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
-            >
+              to="/privacy-policy"
+              variant="inverse"
+              class="block w-full">
               Privacy Policy
             </BaseLink>
             <BaseLink 
-              to="/terms-of-service" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
-            >
+              to="/terms-of-service"
+              variant="inverse"
+              class="block w-full">
               Terms of Service
             </BaseLink>
             <BaseLink 
-              to="/cookie-policy" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
-            >
+              to="/cookie-policy"
+              variant="inverse"
+              class="block w-full">
               Cookie Policy
             </BaseLink>
             <BaseLink 
-              to="/sitemap" 
-              class="block text-gray-300 hover:text-persian-green-400 hover:underline transition-colors duration-200"
-            >
+              to="/sitemap"
+              variant="inverse"
+              class="block w-full">
               Sitemap
             </BaseLink>
           </nav>
@@ -296,4 +296,5 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll);
 });
+
 </script>
