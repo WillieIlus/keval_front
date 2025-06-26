@@ -98,4 +98,17 @@
 
 <script setup lang="ts">
 import { LockClosedIcon, LifebuoyIcon } from '@heroicons/vue/24/outline';
+import { useHead } from '#imports';
+
+// Preload the background image to improve perceived loading performance.
+// For best results, also ensure the image is optimized (compressed and correctly sized).
+useHead({
+  link: [
+    {
+      rel: 'preload',
+      href: '/3d-rendering-chair-melting.jpg',
+      as: 'image'
+    }
+  ]
+});
 </script>
