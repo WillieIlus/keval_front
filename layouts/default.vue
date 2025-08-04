@@ -5,7 +5,7 @@ const authStore = useAuthStore();
 
 <template>
   <div class="sticky top-0 z-50">
-    <TopNav />
+    <!-- <TopNav /> -->
     <MainNav />
   </div>
   <slot />
