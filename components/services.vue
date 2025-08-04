@@ -1,6 +1,6 @@
 <template>
-  <section class="services-section container mx-auto py-8 md:py-12">
-    <h2 class="text-yellow-orange-500 font-bold text-2xl sm:text-3xl mb-6 md:mb-8 text-center">Our Services</h2>
+  <section class="services-section container mx-auto py-14 md:py-24 lg:py-32">
+    <h2 class="text-persian-green-600 font-medium text-2xl sm:text-3xl mb-6 md:mb-8 text-center">Our Services</h2>
     <div class="relative">
       <!-- On mobile, this will be a scrollable container. On md+, it's the viewport for the JS carousel. -->
       <div

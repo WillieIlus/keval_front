@@ -1,10 +1,10 @@
 <template>
-  <section ref="statsSection" class="py-16 bg-gray-50">
+  <section ref="statsSection" class="py-26 md:py-36  bg-gray-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Years of Experience -->
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-persian-green-600 mb-2">
+          <div class="text-4xl md:text-6xl font-medium text-persian-green-600 mb-2">
             {{ animatedStats.experience }}
           </div>
           <div class="text-lg text-gray-600 font-medium">
@@ -14,7 +14,7 @@
 
         <!-- Companies Trusting Us -->
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-persian-green-600 mb-2">
+          <div class="text-4xl md:text-6xl font-medium text-persian-green-600 mb-2">
             {{ formatNumber(animatedStats.companies) }}K+
           </div>
           <div class="text-lg text-gray-600 font-medium">
@@ -24,7 +24,7 @@
 
         <!-- Wall Art Design -->
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-persian-green-600 mb-2">
+          <div class="text-4xl md:text-6xl font-medium text-persian-green-600 mb-2">
             {{ formatNumber(animatedStats.wallArt) }}K
           </div>
           <div class="text-lg text-gray-600 font-medium">
@@ -34,7 +34,7 @@
 
         <!-- Overall Rating -->
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold text-persian-green-600 mb-2">
+          <div class="text-4xl md:text-6xl font-medium text-persian-green-600 mb-2">
             {{ animatedStats.rating }}
           </div>
           <div class="text-lg text-gray-600 font-medium">

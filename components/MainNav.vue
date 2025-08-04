@@ -2,7 +2,7 @@
   <!-- Loading State -->
   <div v-if="isNavLoading">
     <header
-      class="bg-persian-green-600 dark:bg-persian-green-800 flex justify-center items-center text-white dark:text-gray-100 p-4 shadow-md"
+      class="bg-persian-green-600 dark:bg-persian-green-800 flex justify-center items-center text-white dark:text-gray-100 px-4 shadow-md"
     >
       <div class="container mx-auto flex justify-center items-center">
         <p class="text-white font-bold">Loading Navigation... </p>
@@ -13,7 +13,7 @@
   <!-- Loaded State -->
   <template v-else>
     <header
-      class="bg-persian-green-600 dark:bg-persian-green-800 text-white dark:text-gray-100 p-4 shadow-md relative z-50"
+      class="bg-persian-green-600 dark:bg-persian-green-800 text-white dark:text-gray-100 px-4 py-2 shadow-md relative z-50"
     >
       <div class="container mx-auto flex justify-between md:justify-center items-center">
         <!-- Mobile Menu Button -->
@@ -212,7 +212,7 @@
     </Transition>
 
     <!-- Gray Bar: Hidden on mobile, shown on md and up. Responsive margin. -->
-    <div class="hidden md:block bg-gray-500 dark:bg-gray-700 p-1 mb-8 md:mb-12"></div>
+    <!-- <div class="hidden md:block bg-gray-500 dark:bg-gray-700 p-1 mb-8 md:mb-12"></div> -->
   </template>
 </template>
 

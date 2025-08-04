@@ -2,7 +2,7 @@
   <Banner />
   <Services />
   <Stats/>
-  <FaqSection :faq-items="productsStore.getAllFaqs" @toggle="handleToggle" />
+  <!-- <FaqSection :faq-items="productsStore.getAllFaqs" @toggle="handleToggle" /> -->
   <About />
   <Quote />
 </template>
